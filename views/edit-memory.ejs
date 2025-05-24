@@ -1,0 +1,110 @@
+<%- include('partials/header') %>
+
+<div class="row align-items-center mb-5">
+  <div class="col">
+    <h1 class="display-5">Edit Memory</h1>
+    <p class="text-muted lead">Update and refine your cherished moment</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-8 mx-auto">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4 p-lg-5">
+        <form action="/memories/edit/<%= memory.id %>" method="POST" enctype="multipart/form-data">
+          <div class="mb-4">
+            <label for="title" class="form-label">Memory Title</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="title" 
+              name="title" 
+              value="<%= memory.title %>"
+              placeholder="What would you like to call this memory?"
+              required
+              autofocus
+            >
+          </div>
+          
+          <div class="mb-4">
+            <label for="date" class="form-label">When did it happen?</label>
+            <input 
+              type="date" 
+              class="form-control" 
+              id="date" 
+              name="date"
+              value="<%= memory.date %>"
+              required
+            >
+          </div>
+          
+          <div class="mb-4">
+            <label for="caption" class="form-label">Tell your story</label>
+            <textarea 
+              class="form-control" 
+              id="caption" 
+              name="caption" 
+              rows="4" 
+              placeholder="Describe this memory in your own words..."
+            ><%= memory.caption %></textarea>
+            <small class="text-muted">What makes this moment special to you?</small>
+          </div>
+          
+          <% if(memory.Images && memory.Images.length > 0) { %>
+            <div class="mb-4">
+              <label class="form-label">Current Photos</label>
+              <div class="row g-3">
+                <% memory.Images.forEach(function(image) { %>
+                  <div class="col-md-4 col-sm-6">
+                    <div class="card h-100 border-0 shadow-sm">
+                      <div class="position-relative">
+                        <img src="<%= image.path %>" class="card-img-top" alt="Memory image" style="height: 160px; object-fit: cover;">
+                        <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2 rounded-circle delete-image-btn" style="width: 32px; height: 32px;" data-bs-toggle="tooltip" title="Delete image" data-image-id="<%= image.id %>" data-memory-id="<%= memory.id %>">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                <% }); %>
+              </div>
+            </div>
+          <% } %>
+          
+          <div class="mb-5">
+            <label class="form-label">Add More Photos</label>
+            <div class="card bg-light border-0 p-3 mb-3">
+              <div class="input-group">
+                <input 
+                  type="file" 
+                  class="form-control border" 
+                  id="images" 
+                  name="images" 
+                  accept=".jpg,.jpeg,.png" 
+                  multiple
+                >
+                <label class="input-group-text" for="images">
+                  <i class="fas fa-cloud-upload-alt me-2"></i>Upload
+                </label>
+              </div>
+              <div class="form-text mt-2">
+                <i class="fas fa-info-circle me-1"></i> You can select multiple images. Accepted formats: .jpg, .jpeg, .png
+              </div>
+            </div>
+            <div id="imagePreviewContainer" class="row g-3 mt-2"></div>
+          </div>
+          
+          <div class="d-flex justify-content-between">
+            <a href="/memories" class="btn btn-outline-secondary">
+              <i class="fas fa-arrow-left me-2"></i>Back to Memories
+            </a>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save me-2"></i>Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
