@@ -54,13 +54,13 @@
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <% memories.forEach(function(memory, index) { %>
       <div class="col memory-card" style="animation-delay: <%= 0.1 * (index % 6) %>s;" data-memory-id="<%= memory.id %>">
-        <div class="card h-100 shadow-sm border-0 memory-card-content" style="cursor: pointer;">
+        <div class="card h-100 shadow-sm border-0 memory-card-content cursor-pointer">
           <% if(memory.Images && memory.Images.length > 0) { %>
             <div id="carousel<%= memory.id %>" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <% memory.Images.forEach(function(image, index) { %>
                   <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                    <img src="<%= image.path %>" class="d-block w-100 card-img-top" alt="Memory image" style="object-fit: cover; height: 220px;">
+                    <img src="<%= image.path %>" class="d-block w-100 card-img-top" alt="Memory image">
                   </div>
                 <% }); %>
               </div>
@@ -93,7 +93,7 @@
                 <i class="far fa-calendar-alt me-1"></i><%= new Date(memory.date).toLocaleDateString() %>
               </span>
             </div>
-            <p class="card-text"><%= memory.caption %></p>
+            <p class="card-text card-text-truncate"><%= memory.caption %></p>
           </div>
           <div class="card-footer bg-transparent border-0 d-flex justify-content-between">
             <a href="/memories/edit/<%= memory.id %>" class="btn btn-sm btn-outline-secondary">

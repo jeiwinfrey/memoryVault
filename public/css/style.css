@@ -206,6 +206,24 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
 }
 
+/* Truncated text with ellipsis for card captions */
+.card-text-truncate {
+  display: -webkit-box;
+  display: box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 4.8em; /* line-height * number of lines */
+}
+
+/* Utility classes */
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .card-footer {
   padding: var(--space-3) var(--space-4);
   background-color: transparent;
